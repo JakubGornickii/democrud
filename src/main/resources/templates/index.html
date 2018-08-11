@@ -33,12 +33,12 @@
             <td th:text="*{id}"></td>
             <td th:text="*{name}"></td>
             <td th:text="*{surName}"></td>
-            <td th:text="*{email}">kowal@wp.pl</td>
-            <td th:text="*{pesel}">77120554584</td>
-			<td th:text="*{position}">Księgowy</td>
-            <td th:text="*{salary}">3500zł</td>
-            <td class="edit"><a class="aedit" href="#" th:href="@{/edit(id=${employer.id})}">Edit</a></td>
-            <td class="delete"><a class="adelete" href="#" th:href="@{/delete(id=${employer.id})}">Delete</a></td>
+            <td th:text="*{email}"></td>
+            <td th:text="*{pesel}"></td>
+			<td th:text="*{position}"></td>
+            <td th:text="*{salary}"></td>
+            <td class="edit"><a class="aedit" href="#" th:href="@{/edit(id=${employer.id})}">edytuj</a></td>
+            <td class="delete"><a class="adelete" href="#" th:href="@{/delete(id=${employer.id})}">usuń</a></td>
 
 
         </tr>
