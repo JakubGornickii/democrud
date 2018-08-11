@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<link href="https://fonts.googleapis.com/css?family=Lato|Russo+One" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="description" content="Baza pracowników" />
+<meta name="keywords" content="Baza pracowników" />
+<link rel="stylesheet" href="Style.css" type="text/css" />
+</head>
+<body>
+<div class="header">
+
+    <div class="c" ><a href="/" class="cc"> <i class="fas fa-backspace"></i></a></div>
+<div class="a" >Spis pracowników</div>
+
+
+ </div>
+<div class="table1">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Imie</th>
+            <th>Nazwisko</th>
+	    	<th>Email</th>
+            <th>Pesel</th>
+			<th>Stanowisko</th>
+            <th>Wypłata</th>
+			<th></th>
+
+        </tr>
+        <tr>
+            <form th:action="@{/edit(id=${employer.id})}" method="post">
+            <td> <input type="text"  th:attr="value = ${employer.id}" disabled/></td>
+                <td><input type="text" name="name"  th:attr="value = ${employer.name}"/></td>
+            <td><input type="text" name="surName" th:attr="value = ${employer.surName}"/></td>
+            <td><input type="text" name="email" th:attr="value = ${employer.email}"/></td>
+            <td><input type="text" name="pesel" th:attr="value = ${employer.pesel}"/></td>
+            <td><input type="text" name="position" th:attr="value = ${employer.position}"/></td>
+			<td><input type="text" name="salary" th:attr="value = ${employer.salary}"/></td>
+
+            <td class="edit"><input type="submit" value="ok" /></td>
+
+            </form>
+
+        </tr>
+    </table>
+
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="footer">2018 &#169 Jakub Górnicki  -  <i class="fas fa-envelope"></i> Kontakt@Smartfon-Serwis.pl </div>
+</body>
+</html>
