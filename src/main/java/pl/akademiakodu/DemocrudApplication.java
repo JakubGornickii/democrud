@@ -1,7 +1,8 @@
-package pl.akademiakodu.democrud;
+package pl.akademiakodu;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 
 @SpringBootApplication
 public class DemocrudApplication {

@@ -1,4 +1,4 @@
-package configuration;
+package pl.akademiakodu.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +10,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
-		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		return bCryptPasswordEncoder;
+		return new BCryptPasswordEncoder();
 	}
 
 }

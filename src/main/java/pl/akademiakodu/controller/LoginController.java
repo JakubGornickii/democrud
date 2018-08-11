@@ -1,6 +1,8 @@
 package pl.akademiakodu.controller;
 
+import pl.akademiakodu.model.Employer;
 import pl.akademiakodu.model.User;
+import pl.akademiakodu.repository.EmployerRepository;
 import pl.akademiakodu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -12,12 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class LoginController {
+@Autowired
+	private EmployerRepository employerRepository;
 
-
-	
 	@Autowired
 	private UserService userService;
 
@@ -62,12 +66,14 @@ public class LoginController {
 	
 	@RequestMapping(value="/admin/index", method = RequestMethod.GET)
 	public ModelAndView adminhome(){
+		List<Employer> allEmployers = employerRepository.findAll();
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("allEmployers", allEmployers);
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+		modelAndView.addObject("userName", user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
 		modelAndView.addObject("adminMessage","Poziom uprawnień - Administrator");
-		modelAndView.setViewName("admin/index");
+		modelAndView.setViewName("admin/home");
 
 		return modelAndView;
 	}
@@ -77,9 +83,15 @@ public class LoginController {
 		ModelAndView modelAndView = new ModelAndView();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User user = userService.findUserByEmail(auth.getName());
-		modelAndView.addObject("userName", "Witaj " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+		modelAndView.addObject("userName", user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
 		modelAndView.addObject("userMessage","Poziom uprawnień - Urzytkownik");
 		modelAndView.setViewName("user/index");
+		return modelAndView;
+	}
+	@RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
+	public ModelAndView accessdenied(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("accessdenied");
 		return modelAndView;
 	}
 

@@ -21,8 +21,9 @@ a
 	z-index:100;
 	background-color: #000000;
 	text-align:center;
-	padding: 10px;
+	padding: 10px 10px 20px 10px;
 	font-weight: 700;
+
 }
 .table
 {
@@ -81,7 +82,7 @@ td
 	cursor:pointer;
 	
 }
-.a
+.logo
 {
 	display: inline-block;
 }
@@ -156,4 +157,111 @@ a.aedit
 	text-align:center;
 	padding: 2px;
 
+}
+
+.wrapper {    
+	margin-top: 80px;
+	margin-bottom: 20px;
+}
+
+.form-signin {
+	 position: absolute;
+
+  top: 50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+
+  width: 420px;
+  padding: 30px 38px 66px;
+  margin: 0 auto;
+  background-color: #eee;
+  border: 3px dotted rgba(0,0,0,0.1);  
+  }
+
+.form-signin-heading {
+  text-align:center;
+  margin-bottom: 30px;
+}
+
+.form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+}
+
+input[type="text"] {
+  margin-bottom: 0px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+input[type="password"] {
+  margin-bottom: 20px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.form-register
+{
+position: absolute;
+	top: 80%;
+	left: 50%;
+	transform: translate(-50%);
+}
+.validation-message {
+	font-style: normal;
+	font-size: 12px;
+	color: #FF1C19;
+}
+.register-form
+{
+  position: absolute;
+  top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    width: 420px;
+	 padding: 30px 38px 66px;
+  margin: 0 auto;
+  background-color: #eee;
+  border: 3px dotted rgba(0,0,0,0.1);  
+}
+.form-login
+{
+	position: absolute;
+	top: 90%;
+	left: 50%;
+	transform: translate(-50%);
+}
+.user-data
+{
+	position: absolute;
+	display:inline-block;
+	left: 1%;
+}
+.user-role
+{
+	position: absolute;
+	display: inline-block;
+	right: 1%;
+}
+.user-header
+{
+	position: relative;
+	font-family: 'Lato', sans-serif;
+	font-size: 12px;
+	color: #ffffff;
+	letter-spacing: 0;
+	font-weight: 400;
+}
+.acces-img
+{
+    position: absolute;
+    top: 55%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+.image
+{
+    width: auto;
+    height: 500px;
 }
