@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Lato|Russo+One" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="description" content="Baza pracowników"/>
+    <meta name="keywords" content="Baza pracowników"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<div class="header">
+
+    <div class="logo">Spis pracowników</div>
+    <div class="user-header">
+        <div class="user-data">
+            <div class="user-span"><span th:utext="${userName}"></span></div>
+            <div class="div-logout">
+                <form action="/logout" method="post">
+                    <input class="logout" type="submit" value="Wyloguj">
+                </form>
+            </div>
+        </div>
+
+        <div class="user-role"><span th:utext="${adminMessage}"></span></div>
+
+    </div>
+
+</div>
+<div class="table" th:if="not ${allEmployers.isEmpty()}">
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Imie</th>
+            <th>Nazwisko</th>
+            <th>Stanowisko</th>
+
+        </tr>
+        <tr th:each="employer: ${allEmployers}" th:object="${employer}">
+            <td th:text="*{id}"></td>
+            <td th:text="*{name}"></td>
+            <td th:text="*{surName}"></td>
+            <td th:text="*{position}"></td>
+        </tr>
+    </table>
+
+</div>
+
+
+<div class="footer">2018 &#169 Jakub Górnicki - <i class="fas fa-envelope"></i> Kontakt@Smartfon-Serwis.pl</div>
+</body>
+</html>
