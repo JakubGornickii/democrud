@@ -17,62 +17,62 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-@Autowired
-	CustomSuccessHandler customSuccessHandler;
-@Autowired
-	DataSource dataSource;
-@Autowired
-	BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    CustomSuccessHandler customSuccessHandler;
+    @Autowired
+    DataSource dataSource;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
-	
-	@Value("${spring.queries.users-query}")
-	private String usersQuery;
-	
-	@Value("${spring.queries.roles-query}")
-	private String rolesQuery;
 
-	@Autowired
-	public SecurityConfiguration(BCryptPasswordEncoder bCryptPasswordEncoder) {
-		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-	}
+    @Value("${spring.queries.users-query}")
+    private String usersQuery;
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth)
-			throws Exception {
-		auth.
-			jdbcAuthentication()
-				.usersByUsernameQuery(usersQuery)
-				.authoritiesByUsernameQuery(rolesQuery)
-				.dataSource(dataSource)
-				.passwordEncoder(bCryptPasswordEncoder);
-	}
+    @Value("${spring.queries.roles-query}")
+    private String rolesQuery;
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		
-		http.
-			authorizeRequests()
-				.antMatchers("/").permitAll()
-				.antMatchers("/login").permitAll()
-				.antMatchers("/registration").permitAll()
-				.antMatchers("/user**").hasAuthority("USER")
-				.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
-				.authenticated().and().csrf().disable().formLogin()
-				.loginPage("/login").failureUrl("/login?error=true")
-				.successHandler(customSuccessHandler)
-				.usernameParameter("email")
-				.passwordParameter("password")
-				.and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/").and().exceptionHandling()
-				.accessDeniedPage("/accessdenied");
-	}
-	
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-	    web
-	       .ignoring()
-	       .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
-	}
+    @Autowired
+    public SecurityConfiguration(BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth)
+            throws Exception {
+        auth.
+                jdbcAuthentication()
+                .usersByUsernameQuery(usersQuery)
+                .authoritiesByUsernameQuery(rolesQuery)
+                .dataSource(dataSource)
+                .passwordEncoder(bCryptPasswordEncoder);
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+
+        http.
+                authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/registration").permitAll()
+                .antMatchers("/user**").hasAuthority("USER")
+                .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
+                .authenticated().and().csrf().disable().formLogin()
+                .loginPage("/login").failureUrl("/login?error=true")
+                .successHandler(customSuccessHandler)
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .and().logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/").and().exceptionHandling()
+                .accessDeniedPage("/accessdenied");
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+    }
 
 }

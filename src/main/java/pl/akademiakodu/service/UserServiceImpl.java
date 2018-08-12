@@ -14,29 +14,29 @@ import java.util.HashSet;
 
 @Service("userService")
 
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
-	@Qualifier("userRepository")
-	@Autowired
-	private UserRepository userRepository;
-	@Qualifier("roleRepository")
-	@Autowired
+    @Qualifier("userRepository")
+    @Autowired
+    private UserRepository userRepository;
+    @Qualifier("roleRepository")
+    @Autowired
     private RoleRepository roleRepository;
-@Autowired
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
-	@Override
-	public User findUserByEmail(String email) {
-		return userRepository.findByEmail(email);
-	}
 
-	@Override
-	public void saveUser(User user) {
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+    @Override
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public void saveUser(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
         Role userRole = roleRepository.findByRole("USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-		userRepository.save(user);
-	}
+        userRepository.save(user);
+    }
 
 }

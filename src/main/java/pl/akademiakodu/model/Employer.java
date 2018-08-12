@@ -1,5 +1,10 @@
 package pl.akademiakodu.model;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,14 +13,34 @@ import javax.persistence.Id;
 public class Employer {
     @Id
     @GeneratedValue
+    @Column
     private int id;
-private String name;
-private String surName;
-private String email;
-private String pesel;
-private String position;
-private String salary;
-public Employer(){};
+    @NotEmpty(message = "*Proszę wpisać imię")
+    @Column
+    private String name;
+    @NotEmpty(message = "*Proszę wpisać nazwisko")
+    @Column
+    private String surName;
+    @Email(message = "*Proszę wpisać poprawny email")
+    @NotEmpty(message = "*Proszę wpisać email")
+    @Column
+    private String email;
+    @Length(min = 11, message = "*Za mało znaków")
+    @NotEmpty(message = "*Proszę wpisać pesel")
+    @Column
+    private String pesel;
+    @NotEmpty(message = "*Proszę wpisać stanowisko")
+    @Column
+    private String position;
+    @NotEmpty(message = "*Proszę wpisać wypłatę")
+    @Column
+    private String salary;
+
+    public Employer() {
+    }
+
+    ;
+
     public Employer(String name, String surName, String email, String pesel, String position, String salary) {
         this.name = name;
         this.surName = surName;

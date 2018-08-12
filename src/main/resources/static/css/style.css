@@ -56,12 +56,17 @@ td
 	border: 1px solid black;
 	padding: 10px;
 }
-.edit
-{
-	background: #278e19;
-	width: 50px;
+.edit {
+	background-color: #278e19;
+	border: none;
+	color: #000000;
+	line-height: 40px;
+min-width: 65px;
 	text-align: center;
-	font-weight: 700;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	cursor: pointer;
 }
 .edit:hover
 {
@@ -69,32 +74,40 @@ td
 	cursor:pointer
 	
 }
-.delete
-{
+.delete {
+	line-height: 40px;
+	min-width: 65px;
 	background: #f42c2c;
-	width: 50px;
+	border: none;
+	color: #000000;
+
 	text-align: center;
-	font-weight: 700;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	cursor: pointer;
 }
 .delete:hover
 {
 	background: #e31b1b;
-	cursor:pointer;
-	
+	cursor:pointer
+
 }
+
+
 .logo
 {
 	display: inline-block;
 }
-a.bb
+a.add-user-button
 {
 	color: #278e19
 }
-a.bb:hover
+a.add-user-button:hover
 {
 	color: #1d7a11;
 }
-.b
+.add-user
 {
 	display: inline-block;
 	position: absolute;
@@ -104,13 +117,13 @@ a.bb:hover
 
 	
 }
-.b:hover
+.add-user:hover
 {
 	transform: scale(0.8);
 
 	cursor:pointer;
 }
-.c
+.return
 {
 	display: inline-block;
 	position: absolute;
@@ -120,28 +133,22 @@ a.bb:hover
 
 	
 }
-.c:hover
+.return:hover
 {
 	transform: scale(0.8);
 
 	cursor:pointer;
 }
-a.cc
+a.return-button
 {
 	color: #f42c2c;
 }
-a.cc:hover
+a.return-button:hover
 {
 	color: #e31b1b;
 }
-a.adelete
-{
-	color: #000000;
-}
-a.aedit
-{
-	color: #000000;;
-}
+
+
 .footer
 {
 	font-family: 'Russo One', sans-serif;
@@ -264,4 +271,62 @@ position: absolute;
 {
     width: auto;
     height: 500px;
+}
+.td-edit
+{
+	margin: 0;
+	padding: 0;
+}
+.logout
+{
+
+	background: #f42c2c;
+	border: none;
+	color: #000000;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	display: block;
+	float: left;
+	font-size: 12px;
+}
+.div-logout
+{
+	display: inline-block;
+	margin: 0 0 0 10px;
+	padding: 0;
+}
+.user-span
+{
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
+.error-msg
+{
+	font-size: 10px;
+	color: #FF1C19;
+}
+.error-msg-table
+{
+	background: #e5e0e0;
+	border: 0 #e5e0e0;
+	padding: 0;
+	margin: 0;
+}
+.error-msg-cell
+{
+	text-align: center;
+	background: #e5e0e0;
+	border: 0 #e5e0e0;
+	padding: 0;
+	margin: 0;
+}
+.table-add
+{
+	background: #e5e0e0;
+}
+.cell-add
+{
+	background: #cec9c2;
 }

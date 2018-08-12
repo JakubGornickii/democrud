@@ -1,65 +1,71 @@
 <!DOCTYPE HTML>
 <html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-	<link href="https://fonts.googleapis.com/css?family=Lato|Russo+One" rel="stylesheet">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="description" content="Baza pracowników" />
-	<meta name="keywords" content="Baza pracowników" />
-	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link href="https://fonts.googleapis.com/css?family=Lato|Russo+One" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="description" content="Baza pracowników"/>
+    <meta name="keywords" content="Baza pracowników"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
 
 <div class="header">
 
-	<div class="logo" >Spis pracowników</div>
-	<div class="b" > <a href="/admin/add" class="bb"><i class="fas fa-user-plus"></i></a></div>
-	<div class="user-header">
-		<div class="user-data"><span th:utext="${userName}"></span></div>
-		<div class="user-role"><span  th:utext="${adminMessage}"></span></div>
+    <div class="logo">Spis pracowników</div>
+    <div class="add-user"><a href="/admin/add" class="add-user-button"><i class="fas fa-user-plus"></i></a></div>
+    <div class="user-header">
+        <div class="user-data">
+            <div class="user-span"><span th:utext="${userName}"></span></div>
+            <div class="div-logout">
+                <form action="/logout" method="post">
+                    <input class="logout" type="submit" value="Wyloguj">
+                </form>
+            </div>
+        </div>
 
-	</div>
+        <div class="user-role"><span th:utext="${adminMessage}"></span></div>
+
+    </div>
 
 </div>
 <div class="table" th:if="not ${allEmployers.isEmpty()}">
-	<table>
-		<tr>
-			<th>ID</th>
-			<th>Imie</th>
-			<th>Nazwisko</th>
-			<th>Email</th>
-			<th>Pesel</th>
-			<th>Stanowisko</th>
-			<th>Wypłata</th>
-			<th></th>
-			<th></th>
-		</tr>
-		<tr th:each="employer: ${allEmployers}" th:object="${employer}">
-			<td th:text="*{id}"></td>
-			<td th:text="*{name}"></td>
-			<td th:text="*{surName}"></td>
-			<td th:text="*{email}"></td>
-			<td th:text="*{pesel}"></td>
-			<td th:text="*{position}"></td>
-			<td th:text="*{salary}"></td>
-			<td class="edit"><a class="aedit" href="#" th:href="@{/edit(id=${employer.id})}">edytuj</a></td>
-			<td class="delete"><a class="adelete" href="#" th:href="@{/delete(id=${employer.id})}">usuń</a></td>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Imie</th>
+            <th>Nazwisko</th>
+            <th>Email</th>
+            <th>Pesel</th>
+            <th>Stanowisko</th>
+            <th>Wypłata</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr th:each="employer: ${allEmployers}" th:object="${employer}">
+            <td th:text="*{id}"></td>
+            <td th:text="*{name}"></td>
+            <td th:text="*{surName}"></td>
+            <td th:text="*{email}"></td>
+            <td th:text="*{pesel}"></td>
+            <td th:text="*{position}"></td>
+            <td th:text="*{salary}"></td>
+            <td class="td-edit"><a class="edit" href="#" th:href="@{/admin/edit(id=${employer.id})}">edytuj</a></td>
+            <td class="td-edit">
+                <form th:action="@{/admin/delete(id=${employer.id})}" th:method="delete"><input type="submit"
+                                                                                                class="delete"
+                                                                                                value="usuń"/></form>
+            </td>
 
 
-		</tr>
-	</table>
-
-</div>
-<form th:action="@{/logout}" method="get">
-	<button  name="registration"
-			type="Submit">Logout</button>
-
-</form>
-<div>
+        </tr>
+    </table>
 
 </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<div class="footer">2018 &#169 Jakub Górnicki  -  <i class="fas fa-envelope"></i> Kontakt@Smartfon-Serwis.pl </div>
+
+
+<div class="footer">2018 &#169 Jakub Górnicki - <i class="fas fa-envelope"></i> Kontakt@Smartfon-Serwis.pl</div>
 </body>
 </html>

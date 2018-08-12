@@ -1,54 +1,83 @@
 <!DOCTYPE HTML>
 <html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-<link href="https://fonts.googleapis.com/css?family=Lato|Russo+One" rel="stylesheet">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="description" content="Baza pracowników" />
-<meta name="keywords" content="Baza pracowników" />
-<link rel="stylesheet" href="Style.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato|Russo+One" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="description" content="Baza pracowników"/>
+    <meta name="keywords" content="Baza pracowników"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
 <div class="header">
 
-    <div class="c" ><a href="/" class="cc"> <i class="fas fa-backspace"></i></a></div>
-<div class="a" >Spis pracowników</div>
+    <div class="return"><a href="/admin/index" class="return-button"> <i class="fas fa-backspace"></i></a></div>
+    <div class="logo">Spis pracowników</div>
+    <div class="user-header">
+        <div class="user-data">
+            <div class="user-span"><span th:utext="${userName}"></span></div>
+            <div class="div-logout">
+                <form action="/logout" method="post">
+                    <input class="logout" type="submit" value="Wyloguj">
+                </form>
+            </div>
+        </div>
 
+        <div class="user-role"><span th:utext="${adminMessage}"></span></div>
 
- </div>
+    </div>
+
+</div>
 <div class="table1">
-    <table>
+    <table class="table-add">
         <tr>
             <th>ID</th>
             <th>Imie</th>
             <th>Nazwisko</th>
-	    	<th>Email</th>
+            <th>Email</th>
             <th>Pesel</th>
-			<th>Stanowisko</th>
+            <th>Stanowisko</th>
             <th>Wypłata</th>
-			<th></th>
+            <th></th>
 
         </tr>
-        <tr>
-            <form th:action="@{/edit(id=${employer.id})}" method="post">
-            <td> <input type="text"  th:attr="value = ${employer.id}" disabled/></td>
-                <td><input type="text" name="name"  th:attr="value = ${employer.name}"/></td>
-            <td><input type="text" name="surName" th:attr="value = ${employer.surName}"/></td>
-            <td><input type="text" name="email" th:attr="value = ${employer.email}"/></td>
-            <td><input type="text" name="pesel" th:attr="value = ${employer.pesel}"/></td>
-            <td><input type="text" name="position" th:attr="value = ${employer.position}"/></td>
-			<td><input type="text" name="salary" th:attr="value = ${employer.salary}"/></td>
 
-            <td class="edit"><input type="submit" value="ok" /></td>
+        <form th:action="@{/admin/edit(id=${employer.id})}" th:object="${employer}" method="post">
+            <tr>
+                <td class="cell-add"><input type="text" th:attr="value = ${employer.id}" disabled/></td>
+                <td class="cell-add"><input type="text" name="name" th:attr="value = ${employer.name}"/></td>
+                <td class="cell-add"><input type="text" name="surName" th:attr="value = ${employer.surName}"/></td>
+                <td class="cell-add"><input type="text" name="email" th:attr="value = ${employer.email}"/></td>
+                <td class="cell-add"><input type="text" name="pesel" th:attr="value = ${employer.pesel}"/></td>
+                <td class="cell-add"><input type="text" name="position" th:attr="value = ${employer.position}"/></td>
+                <td class="cell-add"><input type="text" name="salary" th:attr="value = ${employer.salary}"/></td>
 
-            </form>
+                <td class="td-edit"><input type="submit" class="edit" value="ok"/></td>
 
-        </tr>
+
+            </tr>
+            <tr class="error-msg-table">
+                <td class="error-msg-cell"></td>
+                <td class="error-msg-cell"><label class="error-msg" th:if="${#fields.hasErrors('name')}"
+                                                  th:errors="*{name}"></label></td>
+                <td class="error-msg-cell"><label class="error-msg" th:if="${#fields.hasErrors('surName')}"
+                                                  th:errors="*{surName}"></label></td>
+                <td class="error-msg-cell"><label class="error-msg" th:if="${#fields.hasErrors('email')}"
+                                                  th:errors="*{email}"></label></td>
+                <td class="error-msg-cell"><label class="error-msg" th:if="${#fields.hasErrors('pesel')}"
+                                                  th:errors="*{pesel}"></label></td>
+                <td class="error-msg-cell"><label class="error-msg" th:if="${#fields.hasErrors('position')}"
+                                                  th:errors="*{position}"></label></td>
+                <td class="error-msg-cell"><label class="error-msg" th:if="${#fields.hasErrors('salary')}"
+                                                  th:errors="*{salary}"></label></td>
+                <td class="error-msg-cell"></td>
+            </tr>
+        </form>
     </table>
 
 </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<div class="footer">2018 &#169 Jakub Górnicki  -  <i class="fas fa-envelope"></i> Kontakt@Smartfon-Serwis.pl </div>
+<div class="footer">2018 &#169 Jakub Górnicki - <i class="fas fa-envelope"></i> Kontakt@Smartfon-Serwis.pl</div>
 </body>
 </html>
