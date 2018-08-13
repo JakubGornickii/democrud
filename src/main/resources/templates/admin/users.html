@@ -13,9 +13,9 @@
 
 </head>
 <body>
+
 <div class="header">
 
-    <div class="return"><a href="/admin/index" class="return-button"> <i class="fas fa-backspace"></i></a></div>
     <div class="logo">Spis pracowników</div>
     <div class="user-header">
         <div class="user-data">
@@ -32,44 +32,38 @@
     </div>
 
 </div>
-<div class="table1">
-    <table class="table-add">
+
+</div>
+<div class="table" th:if="not ${users.isEmpty()}">
+    <table>
         <tr>
+            <th>ID</th>
             <th>Imie</th>
             <th>Nazwisko</th>
             <th>Email</th>
-            <th>Pesel</th>
-            <th>Stanowisko</th>
-            <th>Wypłata</th>
+            <th>Rola</th>
             <th></th>
-
+            <th></th>
         </tr>
+        <tr th:each="user: ${users}" th:object="${user}">
+            <td th:text="*{id}"></td>
+            <td th:text="*{name}"></td>
+            <td th:text="*{lastName}"></td>
+            <td th:text="*{email}"></td>
 
-            <form  autocomplete="off" action="#" th:action="@{/admin/add}"
-                   th:object="${employer}" method="post" role="form">
-                <tr>
-                <td class="cell-add"><input type="text" th:field="*{name}" placeholder="Imie"/></td>
-                <td class="cell-add"><input type="text" th:field="*{surName}" placeholder="Nazwisko"/></td>
-                <td class="cell-add"><input type="text" th:field="*{email}" placeholder="Email"/></td>
-                <td class="cell-add"><input type="text" th:field="*{pesel}" placeholder="Pesel"/></td>
-                <td class="cell-add"><input type="text" th:field="*{position}" placeholder="Stanowisko"/></td>
-                <td class="cell-add"><input type="text" th:field="*{salary}" placeholder="Wypłata"/></td>
+            <td th:each="r :${user.roles}" th:object="${r}">
 
-                <td class="td-edit"><input class="edit" type="submit" value="ok"/></td>
+                <span th:if="${r.role == 'ADMIN'}">Administrator</span>
+                <span th:if="${r.role == 'USER'}">Urzytkownik</span>
 
-
-
+            </td>
+            <td  class="td-edit"><a class="edit" href="#" th:href="@{/admin/users/edit(id=${user.id})}">edytuj</a></td>
+            <td class="td-edit">
+                <form th:if="${user.id != myId}" th:action="@{/admin/users/delete(id=${user.id})}" th:method="delete"><input type="submit"
+                                                                                                class="delete"
+                                                                                                value="usuń"/></form>
+            </td>
         </tr>
-        <tr class="error-msg-table">
-        <td class="error-msg-cell"><label class="error-msg" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></label></td>
-        <td class="error-msg-cell"> <label class="error-msg" th:if="${#fields.hasErrors('surName')}" th:errors="*{surName}"></label></td>
-        <td class="error-msg-cell"><label class="error-msg" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></label></td>
-        <td class="error-msg-cell"><label class="error-msg"  th:if="${#fields.hasErrors('pesel')}" th:errors="*{pesel}" ></label></td>
-        <td class="error-msg-cell"> <label class="error-msg" th:if="${#fields.hasErrors('position')}" th:errors="*{position}" ></label></td>
-        <td class="error-msg-cell"><label class="error-msg" th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></label></td>
-            <td class="error-msg-cell"></td>
-        </tr>
-        </form>
     </table>
 
 </div>
@@ -118,7 +112,7 @@
 
 </div>
 
-    <div class="footer">2018 &#169 Jakub Górnicki - <i class="fas fa-envelope"></i> Kontakt@Smartfon-Serwis.pl</div>
+<div class="footer">2018 &#169 Jakub Górnicki - <i class="fas fa-envelope"></i> Kontakt@Smartfon-Serwis.pl</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script th:src="@{/js/menu.js}"></script>
 </body>

@@ -25,9 +25,17 @@ public class UserDataImpl implements UserData {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         String rString = getRoleString(user);
+        modelAndView.addObject("myId",user.getId());
         modelAndView.addObject("userName", user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         modelAndView.addObject("adminMessage", "Poziom uprawnień - " + rString);
         return modelAndView;
+    }
+
+    @Override
+    public Integer getUserId() { Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        Integer id = user.getId();
+        return id;
     }
 
     private String getRoleString(User user) {

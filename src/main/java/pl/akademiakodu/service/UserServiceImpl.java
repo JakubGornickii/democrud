@@ -8,6 +8,7 @@ import pl.akademiakodu.repository.RoleRepository;
 import pl.akademiakodu.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.akademiakodu.repository.UserRoleRepository;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -23,6 +24,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
+    private UserRoleRepository userRoleRepository;
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
@@ -37,6 +40,12 @@ public class UserServiceImpl implements UserService {
         Role userRole = roleRepository.findByRole("USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
+    }
+
+    @Override
+    public void deleteUser(Integer id) {
+        userRoleRepository.deleteById(id);
+        userRepository.deleteById(id);
     }
 
 }

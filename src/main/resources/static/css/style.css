@@ -99,24 +99,7 @@ min-width: 65px;
 {
 	display: inline-block;
 }
-a.add-user-button
-{
-	color: #278e19
-}
-a.add-user-button:hover
-{
-	color: #1d7a11;
-}
-.add-user
-{
-	display: inline-block;
-	position: absolute;
-	right: 20px;
 
-	transition: transform 0.2s ease-in-out;
-
-	
-}
 .add-user:hover
 {
 	transform: scale(0.8);
