@@ -25,17 +25,35 @@ public class UserDataImpl implements UserData {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         String rString = getRoleString(user);
-        modelAndView.addObject("myId",user.getId());
+        modelAndView.addObject("myId", user.getId());
         modelAndView.addObject("userName", user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         modelAndView.addObject("adminMessage", "Poziom uprawnień - " + rString);
+        modelAndView.addObject("myRole", rString);
         return modelAndView;
     }
 
     @Override
-    public Integer getUserId() { Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    public Integer getUserId() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
         Integer id = user.getId();
         return id;
+    }
+
+    @Override
+    public String getUserRole() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        Set<Role> roles = user.getRoles();
+        String srole = "";
+        for (Role role : roles) {
+            if (role.getRole().equals("ADMIN")) {
+                srole = "ADMIN";
+                break;
+            } else if (role.getRole().equals("USER"))
+                srole = "USER";
+        }
+        return srole;
     }
 
     private String getRoleString(User user) {

@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="template :: head">
+</head>
+<body>
+<div th:replace="template :: header"></div>
+<span th:if="${myRole == 'Administrator'}" ><div th:replace="template :: rAdmin"></div></span>
+<span th:if="${myRole == 'Urzytkownik'}" ><div th:replace="template :: rUser"></div></span>
+<!--Treść strony-->
+
+<div class="table1">
+    <table class="table-add">
+        <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>email</th>
+            <th>hasło</th>
+
+        </tr>
+
+        <form th:action="@{/user/details/update(id=${myId})}" th:object="${user}" th:method="put">
+            <tr>
+                <td class="cell-add"><input type="text" name="name" th:attr="value = ${user.name}"/></td>
+                <td class="cell-add"><input type="text" name="lastName" th:attr="value = ${user.lastName}"/></td>
+                <td class="cell-add"><input type="text" name="email" th:attr="value = ${user.email}"/></td>
+                <td class="cell-add"><input type="password" name="password"/><input type="password" name="password"/></td>
+
+
+                <td class="td-edit"><input type="submit" class="edit" value="ok"/></td>
+
+
+            </tr>
+
+      <tr class="error-msg-table">
+                <td class="error-msg-cell"><label class="error-msg" th:if="${#fields.hasErrors('name')}"
+                                                  th:errors="*{name}"></label></td>
+               <td class="error-msg-cell"><label class="error-msg" th:if="${#fields.hasErrors('lastName')}"
+                                                  th:errors="*{lastName}"></label></td>
+                <td class="error-msg-cell"><label class="error-msg" th:if="${#fields.hasErrors('email')}"
+                                                  th:errors="*{email}"></label></td>
+                <td class="error-msg-cell"><label class="error-msg" th:if="${#fields.hasErrors('password')}"
+                                                  th:errors="*{password}"></label></td>
+
+        </form>
+    </table>
+
+</div>
+
+<!--Koniec treści strony-->
+<span th:if="${myRole == 'Administrator'}" ><div th:replace="template :: menu-admin"></div></span>
+<span th:if="${myRole == 'Urzytkownik'}" ><div th:replace="template :: menu-user"></div></span>
+<div th:replace="template :: footer"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script th:src="@{/js/menu.js}"></script>
+</body>
+</html>

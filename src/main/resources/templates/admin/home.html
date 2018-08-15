@@ -1,37 +1,11 @@
 <!DOCTYPE HTML>
 <html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <link href="https://fonts.googleapis.com/css?family=Lato|Russo+One" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
-          integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="description" content="Baza pracowników"/>
-    <meta name="keywords" content="Baza pracowników"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}"/>
-
+<head th:replace="template :: head">
 </head>
 <body>
+<div th:replace="template :: header"></div>
+<!--Treść strony-->
 
-<div class="header">
-
-    <div class="logo">Spis pracowników</div>
-    <div class="user-header">
-        <div class="user-data">
-            <div class="user-span"><span th:utext="${userName}"></span></div>
-            <div class="div-logout">
-                <form action="/logout" method="post">
-                    <input class="logout" type="submit" value="Wyloguj">
-                </form>
-            </div>
-        </div>
-
-        <div class="user-role"><span th:utext="${adminMessage}"></span></div>
-
-    </div>
-
-</div>
 <div class="table" th:if="not ${allEmployers.isEmpty()}">
     <table>
         <tr>
@@ -65,53 +39,10 @@
     </table>
 
 </div>
-
-
-<div class="container">
-    <div class="menu-toggle">
-        <span class="fa fa-plus" style="font-size:24px"></span>
-    </div>
-
-    <div class="menu-round">
-        <div class="btn-app" style="background:#000000" onclick="window.open('https://github.com/JakubGornickii');">
-            <span class="fab fa-github" style="font-size:24px;padding: 7px"></span>
-        </div>
-        <div class="btn-app" style="background:#3B5998" onclick="window.open('https://www.facebook.com/jakub.gornicki.52');">
-            <span class="fab fa-facebook" style="font-size:20px;padding: 12px"></span>
-        </div>
-        <div class="btn-app" style="background:#0077B5" onclick="window.open('www.linkedin.com/in/Jakub-Gornicki');">
-            <div class="fab fa-linkedin-in" style="font-size:20px;padding: 12px"></div>
-        </div>
-    </div>
-
-    <div class="menu-line">
-        <div class="btn-app" onclick="location.href='/admin/add';">
-            <div class="fa fa-user-plus menu-button-hover"><div class="hoverShow">Dodaj pracownika</div></div>
-        </div>
-        <div class="btn-app">
-            <div class="fa fa-envelope menu-button-hover"><div class="hoverShow">Menu opcja 2</div></div>
-        </div>
-        <div class="btn-app">
-            <div class="fa fa-video-camera menu-button-hover"><div class="hoverShow">Menu opcja 3</div></div>
-        </div>
-        <div class="btn-app">
-            <div class="fa fa-soundcloud menu-button-hover"><div class="hoverShow">Menu opcja 4</div></div>
-        </div>
-        <div class="btn-app">
-            <div class="fa fa-graduation-cap menu-button-hover"><div class="hoverShow">Menu opcja 5</div></div>
-        </div>
-        <div class="btn-app">
-            <div class="fa fa-image menu-button-hover"><div class="hoverShow">Menu opcja 6</div></div>
-        </div>
-        <div class="btn-app" onclick="location.href='/admin/users';">
-            <div class="fa fa-vine menu-button-hover"><div class="hoverShow">Urzytkownicy</div></div>
-        </div>
-    </div>
-
-
-</div>
-
-<div class="footer">2018 &#169 Jakub Górnicki - <i class="fas fa-envelope"></i> Kontakt@Smartfon-Serwis.pl</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<!--Koniec treści strony-->
+<div th:replace="template :: menu-admin"></div>
+<div th:replace="template :: footer"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script th:src="@{/js/menu.js}"></script>
 </body>
