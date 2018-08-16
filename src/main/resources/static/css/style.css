@@ -314,3 +314,85 @@ position: absolute;
 {
 	background: #cec9c2;
 }
+.postMenuButton
+{
+	background: #47443f;
+	color: #ffffff;
+	font-size: 30px;
+	letter-spacing: 2px;
+	margin: 15px;
+	padding: 5px;
+	box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
+	transition: all 0.2s;
+}
+.postMenuContainer
+{
+
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+.postMenuButton:hover
+{
+	background: #1d7a11;
+	cursor: pointer;
+}
+.postMenuForm
+{
+	font-size: 30px;
+}
+.viewPostContainer
+{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5em;
+    width: 70%;
+    border: 1px dotted;
+    padding: 5px;
+}
+.viewPostHeader
+{
+    letter-spacing: 2px;
+    font-size: 24px;
+    background: #47443f;
+    text-align: center;
+    color: #eeefed;
+    padding: 5px;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+.viewPostContent
+{
+    font-size: 16px;
+    background: #cec9c2;
+    padding: 5px;
+    text-align: justify;
+    margin-bottom: 5px;
+    min-height: 200px;
+}
+.viewPostLink
+{
+    font-size: 24px;
+    padding: 5px;
+    width: 120px;
+    border: 10px;
+    border-radius: 10px;
+    background: #47443f;
+    color: #eeefed;
+    cursor: pointer;
+    margin: 10px auto 10px auto;
+    transition: all 0.4s;
+    box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.2);
+}
+.viewPostLink:hover
+{
+    transform: scale(0.9);
+    background: #7cd326;
+}
+.validation-message-true
+{
+	font-style: normal;
+	font-size: 12px;
+	color: #29d827;
+}

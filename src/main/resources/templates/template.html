@@ -36,6 +36,7 @@
 </div>
 <div th:fragment="rAdmin" class="return"><a href="/admin/index" class="return-button"> <i class="fas fa-backspace"></i></a></div>
 <div th:fragment="rUser" class="return"><a href="/user/index" class="return-button"> <i class="fas fa-backspace"></i></a></div>
+<div th:fragment="postMenu" class="return"><a href="/user/postMenu" class="return-button"> <i class="fas fa-backspace"></i></a></div>
 <div class="container" th:fragment="menu-admin">
     <div class="menu-toggle">
         <span class="fa fa-plus" style="font-size:24px"></span>
@@ -60,11 +61,11 @@
         <div class="btn-app" onclick="location.href='/user/details';">
             <div class="far fa-angry menu-button-hover" style="font-size:24px;padding: 7px"><div class="hoverShow">Mój profil</div></div>
         </div>
-        <div class="btn-app">
-            <div class="far fa-angry menu-button-hover" style="font-size:24px;padding: 7px"><div class="hoverShow">Menu opcja 3</div></div>
+        <div class="btn-app" onclick="location.href='/user/postMenu';">
+            <div class="far fa-angry menu-button-hover" style="font-size:24px;padding: 7px"><div class="hoverShow">Moje Posty</div></div>
         </div>
-        <div class="btn-app">
-            <div class="far fa-angry menu-button-hover" style="font-size:24px;padding: 7px"><div class="hoverShow">Menu opcja 4</div></div>
+        <div class="btn-app" onclick="location.href='/admin/moderatePost';">
+            <div class="far fa-angry menu-button-hover" style="font-size:24px;padding: 7px"><div class="hoverShow">Zatwierdzanie postów</div></div>
         </div>
         <div class="btn-app">
             <div class="far fa-angry menu-button-hover" style="font-size:24px;padding: 7px"><div class="hoverShow">Menu opcja 5</div></div>
@@ -100,8 +101,8 @@
         <div class="btn-app" onclick="location.href='/user/details';">
             <div class="far fa-angry menu-button-hover" style="font-size:24px;padding: 7px"><div class="hoverShow">Mój profil</div></div>
         </div>
-        <div class="btn-app">
-            <div class="far fa-angry menu-button-hover" style="font-size:24px;padding: 7px"><div class="hoverShow">Menu opcja 2</div></div>
+        <div class="btn-app" onclick="location.href='/user/postMenu';">
+            <div class="far fa-angry menu-button-hover" style="font-size:24px;padding: 7px"><div class="hoverShow">Moje Posty</div></div>
         </div>
         <div class="btn-app">
             <div class="far fa-angry menu-button-hover" style="font-size:24px;padding: 7px"><div class="hoverShow">Menu opcja 3</div></div>

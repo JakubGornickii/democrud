@@ -2,9 +2,11 @@ package pl.akademiakodu.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import pl.akademiakodu.model.Employer;
+import pl.akademiakodu.model.Post;
 import pl.akademiakodu.model.User;
 import pl.akademiakodu.other.UserData;
 import pl.akademiakodu.repository.EmployerRepository;
+import pl.akademiakodu.service.PostService;
 import pl.akademiakodu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -18,7 +20,7 @@ import java.util.List;
 @RestController
 public class LoginController {
     @Autowired
-    private EmployerRepository employerRepository;
+    PostService postService;
 
     @Autowired
     private UserService userService;
@@ -67,9 +69,9 @@ public class LoginController {
 
     @RequestMapping(value = "/admin/index", method = RequestMethod.GET)
     public ModelAndView adminhome() {
-        List<Employer> allEmployers = employerRepository.findAll();
+        List<Post> posts = postService.findByActive();
         ModelAndView modelAndView = userData.getUserData();
-        modelAndView.addObject("allEmployers", allEmployers);
+        modelAndView.addObject("posts", posts);
 
         modelAndView.setViewName("admin/home");
 
@@ -78,9 +80,9 @@ public class LoginController {
 
     @RequestMapping(value = "/user/index", method = RequestMethod.GET)
     public ModelAndView userhome() {
-        List<Employer> allEmployers = employerRepository.findAll();
+        List<Post> posts = postService.findByActive();
         ModelAndView modelAndView = userData.getUserData();
-        modelAndView.addObject("allEmployers", allEmployers);
+        modelAndView.addObject("posts", posts);
         modelAndView.setViewName("user/home");
         return modelAndView;
     }

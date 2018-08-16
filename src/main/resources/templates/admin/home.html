@@ -5,41 +5,16 @@
 <body>
 <div th:replace="template :: header"></div>
 <!--Treść strony-->
+<div th:if="not ${posts.isEmpty()}">
+    <div class="viewPostContainer"  th:each="post: ${posts}" th:object="${post}">
+        <div class="viewPostHeader" th:text="*{title}"></div>
+        <div class="viewPostContent" th:text="*{content}"></div>
+        <div class="viewPostLink"><a href="#" th:href="*{url}" target="_blank">Do Strony</a></div>
 
-<div class="table" th:if="not ${allEmployers.isEmpty()}">
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Imie</th>
-            <th>Nazwisko</th>
-            <th>Email</th>
-            <th>Pesel</th>
-            <th>Stanowisko</th>
-            <th>Wypłata</th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tr th:each="employer: ${allEmployers}" th:object="${employer}">
-            <td th:text="*{id}"></td>
-            <td th:text="*{name}"></td>
-            <td th:text="*{surName}"></td>
-            <td th:text="*{email}"></td>
-            <td th:text="*{pesel}"></td>
-            <td th:text="*{position}"></td>
-            <td th:text="*{salary}"></td>
-            <td class="td-edit"><a class="edit" href="#" th:href="@{/admin/edit(id=${employer.id})}">edytuj</a></td>
-            <td class="td-edit">
-                <form th:action="@{/admin/delete(id=${employer.id})}" th:method="delete"><input type="submit"
-                                                                                                class="delete"
-                                                                                                value="usuń"/></form>
-            </td>
-
-
-        </tr>
-    </table>
-
+    </div>
 </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
 <!--Koniec treści strony-->
 <div th:replace="template :: menu-admin"></div>
 <div th:replace="template :: footer"></div>

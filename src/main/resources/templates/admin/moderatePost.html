@@ -4,17 +4,22 @@
 </head>
 <body>
 <div th:replace="template :: header"></div>
+<div th:replACE="template :: rAdmin"></div>
 <!--Treść strony-->
 <div th:if="not ${posts.isEmpty()}">
-    <div class="viewPostContainer"  th:each="post: ${posts}" th:object="${post}">
+    <div class="viewPostContainer" th:each="post: ${posts}" th:object="${post}">
         <div class="viewPostHeader" th:text="*{title}"></div>
         <div class="viewPostContent" th:text="*{content}"></div>
-        <div class="viewPostLink"><a href="#" th:href="*{url}" target="_blank">Do Strony</a></div>
+        <div class="viewPostLink">
+            <form th:action="@{/admin/moderatePost(id=*{id})}" th:method="put">
+                <input type="submit" value="Zatwierdz posta">
+            </form>
+        </div>
 
     </div>
 </div>
 <!--Koniec treści strony-->
-<div  th:replace="template :: menu-user"></div>
+<div th:replace="template :: menu-admin"></div>
 <div th:replace="template :: footer"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script th:src="@{/js/menu.js}"></script>
