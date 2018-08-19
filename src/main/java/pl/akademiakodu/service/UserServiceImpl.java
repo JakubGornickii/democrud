@@ -13,6 +13,7 @@ import pl.akademiakodu.repository.UserRoleRepository;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 @Service("userService")
 
@@ -41,7 +42,7 @@ public class UserServiceImpl implements UserService {
     public void updateUser(User user, Integer id) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setId(id);
-        user.setActive(1);
+        user.setActive(0);
         Role userRole = roleRepository.findByRole(userData.getUserRole());
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
@@ -65,6 +66,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(Integer id) {
         return userRepository.getOne(id);
+    }
+
+    @Override
+    public boolean isEnable(String email) {
+        User user = userRepository.findByEmail(email);
+    return user.getActive() == 1;
+    }
+
+    @Override
+    public List<User> notActive() {
+        return userRepository.findByActive(0);
     }
 
 

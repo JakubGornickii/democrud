@@ -18,12 +18,13 @@ import javax.sql.DataSource;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    CustomSuccessHandler customSuccessHandler;
+    private CustomSuccessHandler customSuccessHandler;
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
-
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    CustomAuthFailureHandler customAuthFailureHandler;
 
     @Value("${spring.queries.users-query}")
     private String usersQuery;
@@ -54,11 +55,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
+                .antMatchers("/reSendActivationLink").permitAll()
+                .antMatchers("/disabled").permitAll()
+                .antMatchers("/registration/confirm").permitAll()
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/user**").hasAuthority("USER")
                 .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
-                .loginPage("/login").failureUrl("/login?error=true")
+                .loginPage("/login").failureHandler(customAuthFailureHandler)
                 .successHandler(customSuccessHandler)
                 .usernameParameter("email")
                 .passwordParameter("password")
