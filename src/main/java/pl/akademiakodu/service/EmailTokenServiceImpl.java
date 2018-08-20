@@ -45,9 +45,9 @@ emailTokenRepository.save(emailToken);
     }
 
     @Override
-    public EmailToken findByUserIdActiveToken(Integer userId) {
+    public EmailToken findByUserIdActiveToken(Integer userId,String useFor) {
 
-        return emailTokenRepository.findByActiveAndUserId(true,userId);
+        return emailTokenRepository.findByActiveAndUserIdAndUsefor(true,userId,useFor);
     }
 
 

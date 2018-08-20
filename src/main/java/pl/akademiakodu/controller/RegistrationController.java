@@ -70,12 +70,15 @@ public class RegistrationController {
     public ModelAndView reSend(@RequestParam("email") String email) {
         ModelAndView modelAndView = new ModelAndView();
         User user = userService.findUserByEmail(email);
-        if (user.getActive() == 1) {
+        if (user == null)
+        {
+            modelAndView.addObject("message","Konto o podanym mailu nie istnieje");
+        }
+        else if (user.getActive() == 1) {
             modelAndView.addObject("message","Podane konto jest już aktywne");
 
-            return modelAndView;
         } else if (user.getActive() == 0) {
-            EmailToken emailToken = emailTokenService.findByUserIdActiveToken(user.getId());
+            EmailToken emailToken = emailTokenService.findByUserIdActiveToken(user.getId(),"REGISTER");
             if (emailToken != null) {
                 emailTokenService.tokenExpire(emailToken);
             }
@@ -92,15 +95,16 @@ public class RegistrationController {
     public ModelAndView activeUser(@PathVariable("token") String token) {
         ModelAndView modelAndView = new ModelAndView();
         EmailToken emailToken = emailTokenService.findByToken(token);
-        if (emailToken == null) {
+        if (emailToken == null || !emailToken.getUsefor().equals("REGISTER")) {
             modelAndView.addObject("message","Błędny link aktywacyjny");
         }
-        else if (emailToken.isActive()) {
+     else if (!emailToken.isActive()){
+        modelAndView.addObject("message","Link aktywacyjny stracił ważność prosze wygenerować nowy");
+    }
+        else if (emailToken.isActive() && emailToken.getUsefor().equals("REGISTER")) {
             emailTokenService.tokenExpire(emailToken);
             userService.setActive(emailToken.getUserId());
-            modelAndView.addObject("message","Konto potwierdzone pomyślnie");
-        } else if (!emailToken.isActive()){
-            modelAndView.addObject("message","Link aktywacyjny stracił ważność prosze wygenerować nowy");
+            modelAndView.addObject("message", "Konto potwierdzone pomyślnie");
         }
         modelAndView.setViewName("/infoPage");
         return modelAndView;

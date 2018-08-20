@@ -82,5 +82,12 @@ public class UserServiceImpl implements UserService {
        userRepository.save(user);
     }
 
+    @Override
+    public void updatePassword(String password, Integer userId) {
+       User user = userRepository.getOne(userId);
+       user.setPassword(bCryptPasswordEncoder.encode(password));
+       userRepository.save(user);
+    }
+
 
 }

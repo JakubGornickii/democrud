@@ -23,17 +23,21 @@
     <form th:action="@{/login}" method="POST" class="form-signin">
         <h3 class="form-signin-heading" th:text="Witaj"></h3>
         <br/>
-
+        <div align="center" th:if="${param.error}">
+            <p style="font-size: 20px; color: #FF1C19;">Email lub hasło nie prawidłowe</p>
+        </div>
         <input type="text" id="email" name="email" th:placeholder="Email"
                class="form-control"/> <br/>
         <input type="password" th:placeholder="Hasło"
                id="password" name="password" class="form-control"/> <br/>
 
-        <div align="center" th:if="${param.error}">
-            <p style="font-size: 20px; color: #FF1C19;">Email lub hasło nie prawidłowe</p>
-        </div>
+
+
         <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit"
                 th:text="Login"></button>
+        <div align="center" style="margin-top: 10px;cursor: pointer">
+            <p onclick="location.href='/passwordRecover';" style="font-size: 12px; color: #FF1C19;">Nie pamietam hasła</p>
+        </div>
     </form>
     <br><br><br><br><br><br><br><br><br><br><br>
    <h4> Admin: <br>email: admin@gmail.com<br>

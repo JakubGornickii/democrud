@@ -4,6 +4,7 @@ package pl.akademiakodu.service;
 import pl.akademiakodu.model.User;
 
 import javax.jws.soap.SOAPBinding;
+import javax.persistence.criteria.CriteriaBuilder;
 
 public interface UserService  {
     public User findUserByEmail(String email);
@@ -13,4 +14,5 @@ public interface UserService  {
     public User getUserById(Integer id);
     public boolean isEnable(String email);
     public void setActive(Integer userId);
+    public void updatePassword(String password, Integer userId);
 }

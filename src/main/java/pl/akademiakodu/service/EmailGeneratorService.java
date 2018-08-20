@@ -5,4 +5,5 @@ public interface EmailGeneratorService {
     public String getEmailChangePass(String token);
     public String getEmailChangeEmail(String token);
     public String getNewEmailRegistration(String token);
+    public String getEmailPassworldRecover(String token);
 }

@@ -12,7 +12,7 @@ public class EmailGeneratorServiceImpl implements EmailGeneratorService {
 
     @Override
     public String getEmailChangePass(String token) {
-        return "W celu zmiany hasła kliknij poniższy link http://localhost:8084/passworld/change/"+token;
+        return "W celu zatwierdzenia nowego hasła http://localhost:8084/password/change/"+token;
     }
 
     @Override
@@ -23,5 +23,10 @@ public class EmailGeneratorServiceImpl implements EmailGeneratorService {
     @Override
     public String getNewEmailRegistration(String token) {
         return "Oto nowy link do aktywacji konta http://localhost:8084/registration/confirm/"+token;
+    }
+
+    @Override
+    public String getEmailPassworldRecover(String token) {
+        return "Link do nadania nowego hasła  http://localhost:8084/password/recover/"+token;
     }
 }
