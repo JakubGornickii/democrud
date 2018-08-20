@@ -72,13 +72,13 @@ public class LoginController {
     @RequestMapping(value = "/disabled", method = RequestMethod.GET)
     public ModelAndView disabledPage() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/activationError");
+        modelAndView.setViewName("activationError");
         return modelAndView;
     }
 
     @RequestMapping(value = "/passwordRecover", method = RequestMethod.GET)
     public ModelAndView passRecoverPage() {
-        return new ModelAndView("/passwordRecover");
+        return new ModelAndView("passwordRecover");
     }
 
     @RequestMapping(value = "/passwordRecover", method = RequestMethod.POST)
@@ -93,7 +93,7 @@ public class LoginController {
             emailService.sendSimpleMessage(user.getEmail(), "Zmiana hasła", generatedEmail);
             modelAndView.addObject("message", "Na podany adres email wysłano linka do zmiany hasła");
         }
-        modelAndView.setViewName("/infoPage");
+        modelAndView.setViewName("infoPage");
         return modelAndView;
     }
 
@@ -103,18 +103,18 @@ public class LoginController {
         EmailToken emailToken = emailTokenService.findByToken(token);
         if (emailToken == null || !emailToken.getUsefor().equals("PAS_RECOVER")) {
             modelAndView.addObject("message", "Błędny link do zmiany hasła");
-            modelAndView.setViewName("/infoPage");
+            modelAndView.setViewName("infoPage");
             return modelAndView;
         } else if (!emailToken.isActive()) {
             modelAndView.addObject("message", "Link do zmiany hasła stracił ważność prosze wygenerować nowy");
-            modelAndView.setViewName("/infoPage");
+            modelAndView.setViewName("infoPage");
             return modelAndView;
         } else if (emailToken.isActive() && emailToken.getUsefor().equals("PAS_RECOVER")) {
             User user = new User();
             modelAndView.addObject("user", user);
             modelAndView.addObject("token", emailToken.getToken());
 
-            modelAndView.setViewName("/newPassword");
+            modelAndView.setViewName("newPassword");
         }
         return modelAndView;
     }
@@ -123,11 +123,11 @@ public class LoginController {
     public ModelAndView newPass(@Valid User user, BindingResult bindingResult, @RequestParam("token") String token) {
         ModelAndView modelAndView = new ModelAndView();
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("/newPassword");
+            modelAndView.setViewName("newPassword");
         }
         if (token == null) {
             modelAndView.addObject("message", ":)");
-            modelAndView.setViewName("/infoPage");
+            modelAndView.setViewName("infoPage");
             return modelAndView;
         } else {
             EmailToken emailToken = emailTokenService.findByToken(token);
@@ -135,7 +135,7 @@ public class LoginController {
                 emailTokenService.tokenExpire(emailToken);
                 userService.updatePassword(user.getPassword(), emailToken.getUserId());
                 modelAndView.addObject("message", "Hasło zmienione");
-                modelAndView.setViewName("/infoPage");
+                modelAndView.setViewName("infoPage");
             }
         }
         return modelAndView;

@@ -87,7 +87,7 @@ public class RegistrationController {
             emailService.sendSimpleMessage(user.getEmail(), "Potwierdzenie rejestracji", generatedEmail);
             modelAndView.addObject("message","Link aktywacyjny został ponownie wysłany na maila");
         }
-        modelAndView.setViewName("/infoPage");
+        modelAndView.setViewName("infoPage");
         return modelAndView;
     }
 
@@ -106,7 +106,7 @@ public class RegistrationController {
             userService.setActive(emailToken.getUserId());
             modelAndView.addObject("message", "Konto potwierdzone pomyślnie");
         }
-        modelAndView.setViewName("/infoPage");
+        modelAndView.setViewName("infoPage");
         return modelAndView;
     }
 
