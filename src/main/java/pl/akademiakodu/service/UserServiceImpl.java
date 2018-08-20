@@ -11,9 +11,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.akademiakodu.repository.UserRoleRepository;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
+
 
 @Service("userService")
 
@@ -42,7 +43,7 @@ public class UserServiceImpl implements UserService {
     public void updateUser(User user, Integer id) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setId(id);
-        user.setActive(0);
+        user.setActive(1);
         Role userRole = roleRepository.findByRole(userData.getUserRole());
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
@@ -51,7 +52,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setActive(1);
+        user.setActive(0);
         Role userRole = roleRepository.findByRole("USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
@@ -75,8 +76,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> notActive() {
-        return userRepository.findByActive(0);
+    public void setActive(Integer userId) {
+       User user = userRepository.getOne(userId);
+       user.setActive(1);
+       userRepository.save(user);
     }
 
 

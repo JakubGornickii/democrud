@@ -17,7 +17,7 @@ public class EmailTokenServiceImpl implements EmailTokenService{
 
         int leftLimit = 97;
         int rightLimit = 122;
-        int targetStringLength = 100;
+        int targetStringLength = 66;
         Random random = new Random();
         StringBuilder buffer = new StringBuilder(targetStringLength);
         for (int i = 0; i < targetStringLength; i++) {
@@ -39,14 +39,15 @@ emailTokenRepository.save(emailToken);
     }
 
     @Override
-    public void tokenDelete(EmailToken emailToken) {
-        emailTokenRepository.delete(emailToken);
+    public void tokenExpire(EmailToken emailToken) {
+        emailToken.setActive(false);
+        emailTokenRepository.save(emailToken);
     }
 
     @Override
-    public EmailToken findByUserId(Integer userId) {
+    public EmailToken findByUserIdActiveToken(Integer userId) {
 
-        return emailTokenRepository.findByUserId(userId);
+        return emailTokenRepository.findByActiveAndUserId(true,userId);
     }
 
 

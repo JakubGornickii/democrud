@@ -6,5 +6,5 @@ import pl.akademiakodu.model.EmailToken;
 @Repository
 public interface EmailTokenRepository extends JpaRepository<EmailToken,Integer> {
     EmailToken findByToken(String token);
-    EmailToken findByUserId(Integer UserId);
+    EmailToken findByActiveAndUserId(boolean isActive,Integer userId);
 }

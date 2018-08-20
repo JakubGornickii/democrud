@@ -17,18 +17,10 @@
 <div th:replace="template :: header-logout"></div>
 <!--Treść strony-->
 <div class="postMenuContainer">
-
-    <div> <form th:action="@{/reSendActivationLink}" method="POST" class="form-signin">
-        <input type="text" id="email" name="email" th:placeholder="Email"
-               class="form-control"/><br/>
-
-        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit"
-                th:text="Login"></button>
-        <div><h2>Proszę aktywować konto link znajduję w mailu.</h2></div>
-        <div><h3>Jeśli link nie doszedł proszę wpisać maila do wysłania linka ponownie</h3></div>
-
-    </div>
-
+    <div>  <h1 th:utext="${message}"></h1></div>
+   <div> <form class="form-login" th:action="@{/}" method="get">
+        <button class="btn btn-md btn-warning btn-block" type="Submit">Do strony logowania</button>
+   </form></div>
 </div>
 <!--Koniec treści strony-->
 <div th:replace="template :: footer"></div>

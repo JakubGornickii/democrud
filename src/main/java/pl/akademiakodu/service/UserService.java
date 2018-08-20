@@ -3,7 +3,7 @@ package pl.akademiakodu.service;
 
 import pl.akademiakodu.model.User;
 
-import java.util.List;
+import javax.jws.soap.SOAPBinding;
 
 public interface UserService  {
     public User findUserByEmail(String email);
@@ -12,5 +12,5 @@ public interface UserService  {
     public void deleteUser(Integer id);
     public User getUserById(Integer id);
     public boolean isEnable(String email);
-    public List<User> notActive();
+    public void setActive(Integer userId);
 }

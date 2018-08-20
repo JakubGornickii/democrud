@@ -19,4 +19,9 @@ public class EmailGeneratorServiceImpl implements EmailGeneratorService {
     public String getEmailChangeEmail(String token) {
         return "W celu zmiany emaila kliknij poniższy link http://localhost:8084/email/change/"+token;
     }
+
+    @Override
+    public String getNewEmailRegistration(String token) {
+        return "Oto nowy link do aktywacji konta http://localhost:8084/registration/confirm/"+token;
+    }
 }

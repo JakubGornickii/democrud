@@ -25,6 +25,7 @@ public class CustomAuthFailureHandler
        }
        else
        {
+           System.out.println(exception.getMessage());
            response.sendRedirect(request.getContextPath() + "/login?error=true");
        }
 
